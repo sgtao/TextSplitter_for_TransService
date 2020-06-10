@@ -1,0 +1,14 @@
+body {
+  font-size: 14px;
+  font-family: Verdana, sans-serif;
+  background: rgb(60, 78, 179);
+  color: white;
+  margin: 0;
+}
+
+a {
+  color: lightyellow;
+}
+a:visited {
+  color: darkorange;
+}

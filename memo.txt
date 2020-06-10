@@ -1,0 +1,8 @@
+# 20200611_TextSplitter_for_TransService
+- [Google翻訳](https://translate.google.co.jp/)は便利だけど、文字数制限を気にしてテキスト貼り付けするのが面倒
+  - そこで、長文テキストを分割するウェブサイトを作成する。
+
+## sample site:
+- [Demo. Site](docs/index.html)
+
+
