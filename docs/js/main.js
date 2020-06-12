@@ -3,9 +3,11 @@
 var textarea_source = document.querySelector('#editarea');
 var button_split = document.querySelector('#split');
 var button_flush = document.querySelector('#flush');
-var source_text=""; 
 var result_area = document.querySelector('#results');
+var separate_cond = document.querySelector('#separate_cond');
+var source_text=""; 
 var initial_element = "";
+var separate_quate; // number of words for add separetor
 
 // subfunction for debug
 function show_charcode(textstring){
@@ -29,12 +31,11 @@ function split_textstrings(textstring) {
     return '';
   }
 
-  console.log("string : ", tmp_str);
   for (let i = 0; i < textstring.length; i++) {
     let c_char = textstring.charAt(i);
     let c_code = textstring.charCodeAt(i);
     let n_code = textstring.charCodeAt(i+1);; // code of next charactor
-    console.log(c_char, " : char code = ", c_code.toString(16));
+    // console.log(c_char, " : char code = ", c_code.toString(16));
 
     // 1文字ずつ「result」に格納していく
     if (c_code === 0x0a) { 
@@ -53,7 +54,7 @@ function split_textstrings(textstring) {
     if ((c_code >= 0x30 && c_code <= 0x39) && head_sentence === true) { continue; } // if number at head of sentence, no change newline flag }
     head_sentence = false;
 
-    console.log(tmp_str);
+    // console.log(tmp_str);
 
     // if period , update next sentence.
     if (c_code === 0x2e && head_sentence === false) { 
@@ -88,6 +89,7 @@ function add_separator(target) {
 // invoke split text
 button_split.addEventListener('click', () => {
   source_text = textarea_source.value;
+  separate_quate  = separate_cond.value;
 
   // split source text to each one sentense.
   let str_array = new Array();
@@ -101,7 +103,7 @@ button_split.addEventListener('click', () => {
     add_split_text(result_area, `${str_array[i]}`);
     sum_of_word += str_array[i].length;
 
-    if (sum_of_word > 500) {
+    if (sum_of_word > separate_quate) {
       add_separator(result_area);
       sum_of_word = 0;
     }
