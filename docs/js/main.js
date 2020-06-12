@@ -18,9 +18,9 @@ function show_charcode(textstring){
 function split_textstrings(textstring) {
   let str_array = [];
   let tmp_str = '';
-  let newline = true;
+  let newline = true, next_sentence = false;
   console.log("string : ", tmp_str);
-  for (let i = 0, newline = true; i < textstring.length; i++) {
+  for (let i = 0, newline = true, next_sentence = false; i < textstring.length; i++) {
     let c_char = textstring.charAt(i);
     let c_code = textstring.charCodeAt(i);
     let n_code = textstring.charCodeAt(i+1);; // code of next charactor
@@ -41,16 +41,20 @@ function split_textstrings(textstring) {
     // if period , update next sentence.
     if (c_code === 0x2e && newline === false) { 
       // next is space or newline, update sentence
-      if (n_code === 0x20 || n_code === 0x0a) { 
-        str_array.push(tmp_str);
-        tmp_str = '';
-        newline = true;
-      }
+      if (n_code === 0x20 || n_code === 0x0a) { next_sentence = true; }
     }
-
+    if (c_code === 0x3b && newline === false) {
+      next_sentence = true;
+    }
+    if (next_sentence === true) {
+      str_array.push(tmp_str);
+      tmp_str = '';
+      newline = true;
+    }
   }
 
   // let str_dummy = ["hoge  hoge.", "foobar."]; // for dummy
+  str_array.push(tmp_str);
   return str_array;
 }
 
@@ -89,6 +93,7 @@ function flush_Result_area() {
 }
 // invoke flush Result
 button_flush.addEventListener('click', () => {
+  textarea_source.value = '';
   flush_Result_area();
 });
 
