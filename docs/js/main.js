@@ -16,9 +16,42 @@ function show_charcode(textstring){
 
 // convert text to strings array.
 function split_textstrings(textstring) {
-  // dummy function
-  let str_array = ["hogehoge.","foobar."];
-  return str_array; 
+  let str_array = [];
+  let tmp_str = '';
+  let newline = true;
+  console.log("string : ", tmp_str);
+  for (let i = 0, newline = true; i < textstring.length; i++) {
+    let c_char = textstring.charAt(i);
+    let c_code = textstring.charCodeAt(i);
+    let n_code = textstring.charCodeAt(i+1);; // code of next charactor
+    console.log(c_char, " : char code = ", c_code.toString(16));
+
+    // 1文字ずつ「result」に格納していく
+    if (c_code === 0x0a) { continue; } // if newline, skip
+    if (c_code === 0x20 && newline === true) { continue; } // if space at head of sentence, skip
+    tmp_str += c_char;
+
+    // update newline flag
+    if (c_code === 0x2e && newline === true) { continue; } // if priod at head of sentence, no change newline flag }
+    if ((c_code >= 0x30 && c_code <= 0x39) && newline === true) { continue; } // if number at head of sentence, no change newline flag }
+    newline = false;
+
+    console.log(tmp_str);
+
+    // if period , update next sentence.
+    if (c_code === 0x2e && newline === false) { 
+      // next is space or newline, update sentence
+      if (n_code === 0x20 || n_code === 0x0a) { 
+        str_array.push(tmp_str);
+        tmp_str = '';
+        newline = true;
+      }
+    }
+
+  }
+
+  // let str_dummy = ["hoge  hoge.", "foobar."]; // for dummy
+  return str_array;
 }
 
 // add splited text to target element by appendChild
