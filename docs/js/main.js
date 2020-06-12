@@ -76,30 +76,36 @@ function split_textstrings(textstring) {
 // add splited text to target element by appendChild
 function add_split_text(target, str) {
   let add_div = document.createElement('div');
-  let add_hr = document.createElement('hr');
   add_div.setAttribute("class", "split_str");
   add_div.textContent = str;
   target.appendChild(add_div);
+}
+function add_separator(target) {
+  let add_hr = document.createElement('hr');
   target.appendChild(add_hr);
 }
 
 // invoke split text
 button_split.addEventListener('click', () => {
   source_text = textarea_source.value;
-  // console.dir(source_text);
-  // show_charcode(source_text);
 
   // split source text to each one sentense.
   let str_array = new Array();
   str_array = split_textstrings(source_text);
 
   // show sentenses at each textboxs
+  let sum_of_word = 0;
   flush_Result_area();
   for (let i in str_array) {
     console.log(`${i} : ${str_array[i]}`);
-    add_split_text(result_area, `${i} : ${str_array[i]}`);
-  }
+    add_split_text(result_area, `${str_array[i]}`);
+    sum_of_word += str_array[i].length;
 
+    if (sum_of_word > 500) {
+      add_separator(result_area);
+      sum_of_word = 0;
+    }
+  }
 });
 
 // rewrite target by initial string
