@@ -75,14 +75,19 @@ function split_textstrings(textstring) {
 }
 
 // add splited text to target element by appendChild
-function add_split_text(target, str) {
+function make_split_text(target, str) {
   let add_textarea = document.createElement('textarea');
-  // add_div.setAttribute("class", "split_str");
   add_textarea.setAttribute("class", "split_text");
   add_textarea.setAttribute("rows", "5");
   add_textarea.setAttribute("cols", "70%");
-  add_textarea.textContent = str;
-  target.appendChild(add_textarea);
+  add_textarea.textContent = str + '\n';
+  
+  return add_textarea;
+}
+function add_split_text(target, str) {
+  let tmp_str;
+  tmp_str = target.textContent + str + '\n';
+  target.textContent = tmp_str;
 }
 function add_separator(target) {
   let add_hr = document.createElement('hr');
@@ -99,16 +104,22 @@ button_split.addEventListener('click', () => {
   str_array = split_textstrings(source_text);
 
   // show sentenses at each textarea
-  let sum_of_word = 0;
+  let sum_of_words = 0, nth_textarea = 1;
+  let add_text_area;
   flush_Result_area();
   for (let i in str_array) {
     console.log(`${i} : ${str_array[i]}`);
-    add_split_text(result_area, `${str_array[i]}`);
-    sum_of_word += str_array[i].length;
-    // add separate
-    if (sum_of_word > separate_quate) {
-      add_separator(result_area);
-      sum_of_word = 0;
+    // add_split_text(result_area, `${str_array[i]}`);
+    if (sum_of_words === 0) {
+      console.log("No. ", nth_textarea++);
+      add_text_area = make_split_text(result_area, `${str_array[i]}`);
+      result_area.appendChild(add_text_area);
+    } else {
+      add_split_text(add_text_area, `${str_array[i]}`);
+    }
+    sum_of_words += str_array[i].length;
+    if (sum_of_words> separate_quate) {
+      sum_of_words = 0;
     }
   }
 });
