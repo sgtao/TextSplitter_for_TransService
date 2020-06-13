@@ -76,10 +76,13 @@ function split_textstrings(textstring) {
 
 // add splited text to target element by appendChild
 function add_split_text(target, str) {
-  let add_div = document.createElement('div');
-  add_div.setAttribute("class", "split_str");
-  add_div.textContent = str;
-  target.appendChild(add_div);
+  let add_textarea = document.createElement('textarea');
+  // add_div.setAttribute("class", "split_str");
+  add_textarea.setAttribute("class", "split_text");
+  add_textarea.setAttribute("rows", "5");
+  add_textarea.setAttribute("cols", "70%");
+  add_textarea.textContent = str;
+  target.appendChild(add_textarea);
 }
 function add_separator(target) {
   let add_hr = document.createElement('hr');
@@ -95,14 +98,14 @@ button_split.addEventListener('click', () => {
   let str_array = new Array();
   str_array = split_textstrings(source_text);
 
-  // show sentenses at each textboxs
+  // show sentenses at each textarea
   let sum_of_word = 0;
   flush_Result_area();
   for (let i in str_array) {
     console.log(`${i} : ${str_array[i]}`);
     add_split_text(result_area, `${str_array[i]}`);
     sum_of_word += str_array[i].length;
-
+    // add separate
     if (sum_of_word > separate_quate) {
       add_separator(result_area);
       sum_of_word = 0;

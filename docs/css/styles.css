@@ -4,6 +4,7 @@ body {
   background: rgb(60, 78, 179);
   color: white;
   margin: 0;
+  position: relative;
 }
 
 a {
@@ -11,4 +12,13 @@ a {
 }
 a:visited {
   color: darkorange;
+}
+
+#results {
+  display: inline-block;
+  position: relative;
+  width: 90%;
+}
+.split_text {
+  float: right;
 }
