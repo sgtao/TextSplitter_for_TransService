@@ -78,10 +78,9 @@ function split_textstrings(textstring) {
 function make_split_text(target, str) {
   let add_textarea = document.createElement('textarea');
   add_textarea.setAttribute("class", "split_text");
-  add_textarea.setAttribute("rows", "5");
+  add_textarea.setAttribute("rows", "3");
   add_textarea.setAttribute("cols", "70%");
   add_textarea.textContent = str + '\n';
-  
   return add_textarea;
 }
 function add_split_text(target, str) {
@@ -93,7 +92,21 @@ function add_separator(target) {
   let add_hr = document.createElement('hr');
   target.appendChild(add_hr);
 }
+function add_copy_button(button_id, copy_target_id) {
+  let add_btn = document.createElement('span');
+  add_btn.setAttribute("id", button_id);
+  add_btn.setAttribute("class", "copy_btn");
+  add_btn.textContent = "Copy.";
 
+  add_btn.addEventListener('click', ()=>{
+    let copyText = document.querySelector(copy_target_id);
+    copyText.select();
+    document.execCommand("copy");
+    console.log('Copy : #', copy_target_id );
+  });
+
+  return add_btn;
+}
 // invoke split text
 button_split.addEventListener('click', () => {
   source_text = textarea_source.value;
@@ -105,15 +118,21 @@ button_split.addEventListener('click', () => {
 
   // show sentenses at each textarea
   let sum_of_words = 0, nth_textarea = 1;
-  let add_text_area;
+  let add_separate, add_text_area, add_copy_btn;
   flush_Result_area();
   for (let i in str_array) {
     console.log(`${i} : ${str_array[i]}`);
     // add_split_text(result_area, `${str_array[i]}`);
     if (sum_of_words === 0) {
       console.log("No. ", nth_textarea++);
+      add_separate = document.createElement('div');
+      add_separate.setAttribute("class", "add_sparate");
       add_text_area = make_split_text(result_area, `${str_array[i]}`);
-      result_area.appendChild(add_text_area);
+      add_text_area.setAttribute('id',"split_textarea" + nth_textarea);
+      add_copy_btn = add_copy_button("copy_btn" + nth_textarea, "#split_textarea" + nth_textarea);
+      add_separate.appendChild(add_copy_btn);
+      add_separate.appendChild(add_text_area);
+      result_area.appendChild(add_separate);
     } else {
       add_split_text(add_text_area, `${str_array[i]}`);
     }

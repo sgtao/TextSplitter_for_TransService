@@ -3,8 +3,8 @@ body {
   font-family: Verdana, sans-serif;
   background: rgb(60, 78, 179);
   color: white;
-  margin: 0;
   position: relative;
+  width: 100%;
 }
 
 a {
@@ -13,12 +13,39 @@ a {
 a:visited {
   color: darkorange;
 }
-
+header {
+  width: 100%;
+}
+footer {
+  width: 100%;
+}
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
 #results {
   display: inline-block;
   position: relative;
   width: 90%;
 }
+.add_sparate {
+  display: flex;
+  width: 90%;
+  margin: 10px;
+
+}
 .split_text {
   float: right;
+}
+.copy_btn {
+  margin: 10px;
+  padding: 5px;
+  background-color: lightgray;
+  color: black;
+  border: black 1px solid;
+  border-radius: 5px;
+}
+.copy_btn:hover {
+  cursor: pointer;
 }
