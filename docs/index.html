@@ -11,8 +11,9 @@
     <header>
       <h1>TextSplitter_for_TransService</h1>
       <li>プレーンテキストを、行単位で分割します。<ul>
-      <li>翻訳サイトは便利だけど、文字数制限を気にしてテキスト貼り付けするのが面倒。なので、長文テキストを行単位で一定文字数を超えたら分割するサービスを作成する。</li>
-      <li>ターゲットサービス：<a href="https://translate.google.co.jp/" target="_blank">Google翻訳</a></li>
+      <li>翻訳サイトは便利だけど、文字数制限を気にしてテキスト貼り付けするのが面倒。</li>
+      <li>なので、長文テキストを行単位で一定文字数を超えたら分割するサービスを作成する。</li>
+      <li>ターゲットサービス：<a href="https://www.deepl.com/translator" target="_blank">DeepL翻訳ツール</a></li>
       </ul>
       </li>
       <hr>
@@ -29,7 +30,7 @@
           <button type="button" id="flush">flush Result:</button>
         </span>
         <span>
-          Separate condition: over <input type="text" id="separate_cond" cols='8' value="2000"> words</button>
+          Separate condition: over <input type="text" id="separate_cond" cols='8' value="1000"> words</button>
         </span>
       </div>
       <hr>
@@ -39,7 +40,7 @@
     </div>
     <footer>
       <hr>
-      <p>Copyright © 2020 <a href="https://github.com/sgtao/" target="_blank">sgtao.github.io</a> All Rights Reserved.</p>
+      <p>Copyright © 2020,2021 <a href="https://github.com/sgtao/" target="_blank">sgtao.github.io</a> All Rights Reserved.</p>
     </footer>
     <script type="text/javascript" src="js/main.js"></script>
   </div>  
